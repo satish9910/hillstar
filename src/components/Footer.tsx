@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin, Globe, Twitter, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Send, Share2 } from "lucide-react";
 import { Logo } from "./Logo";
 import { SITE } from "@/lib/site";
 
@@ -49,7 +49,7 @@ export function Footer() {
         <div>
           <h4 className="font-display font-bold mb-4 text-white">Follow Us</h4>
           <div className="flex gap-3">
-            {[Globe, Twitter, Instagram].map((Icon, i) => (
+            {[Globe, Send, Share2].map((Icon, i) => (
               <a
                 key={i}
                 href="#"
