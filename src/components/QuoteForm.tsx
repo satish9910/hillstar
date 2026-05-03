@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
 import { Loader2, CheckCircle2, Send } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import { SITE } from "@/lib/site";
 
 const schema = z.object({
@@ -9,9 +8,9 @@ const schema = z.object({
   email: z.string().trim().email("Valid email required").max(255),
   phone: z.string().trim().min(7, "Valid phone required").max(20),
   company: z.string().trim().max(150).optional().or(z.literal("")),
-  product_interest: z.string().trim().max(100).optional().or(z.literal("")),
-  quantity: z.string().trim().max(50).optional().or(z.literal("")),
-  message: z.string().trim().max(1000).optional().or(z.literal("")),
+  product_interest: z.string().trim().min(1, "Product is required").max(100),
+  quantity: z.string().trim().min(1, "Quantity is required").max(50),
+  message: z.string().trim().min(1, "Message is required").max(1000),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -23,6 +22,8 @@ const PRODUCTS = [
   "Lighting Capacitor",
   "Custom / Bulk Order",
 ];
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+const QUOTE_API_URL = `${API_BASE_URL}/api/quote`;
 
 export function QuoteForm() {
   const [data, setData] = useState<FormData>({
@@ -55,20 +56,37 @@ export function QuoteForm() {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase.from("quote_submissions").insert({
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      company: parsed.data.company || null,
-      product_interest: parsed.data.product_interest || null,
-      quantity: parsed.data.quantity || null,
-      message: parsed.data.message || null,
-    });
-    setSubmitting(false);
-    if (error) {
+    try {
+      const response = await fetch(QUOTE_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: parsed.data.name,
+          email: parsed.data.email,
+          phone: parsed.data.phone,
+          company: parsed.data.company || "",
+          product_interest: parsed.data.product_interest,
+          quantity: parsed.data.quantity,
+          message: parsed.data.message,
+        }),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        const apiMessage =
+          result && typeof result.message === "string"
+            ? result.message
+            : "Could not submit. Please try again or call us.";
+        setErrors({ message: apiMessage });
+        return;
+      }
+    } catch {
       setErrors({ message: "Could not submit. Please try again or call us." });
       return;
+    } finally {
+      setSubmitting(false);
     }
+
     setSuccess(true);
     setData({ name: "", email: "", phone: "", company: "", product_interest: "", quantity: "", message: "" });
   };
@@ -163,7 +181,7 @@ export function QuoteForm() {
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-foreground mb-1.5 uppercase tracking-wide">
-            Product
+            Product *
           </label>
           <select
             value={data.product_interest || ""}
@@ -175,10 +193,13 @@ export function QuoteForm() {
               <option key={p} value={p}>{p}</option>
             ))}
           </select>
+          {errors.product_interest && (
+            <p className="text-xs text-destructive mt-1">{errors.product_interest}</p>
+          )}
         </div>
         <div>
           <label className="block text-xs font-semibold text-foreground mb-1.5 uppercase tracking-wide">
-            Quantity
+            Quantity *
           </label>
           <input
             value={data.quantity || ""}
@@ -186,12 +207,13 @@ export function QuoteForm() {
             className={inputCls}
             placeholder="e.g. 500 pcs"
           />
+          {errors.quantity && <p className="text-xs text-destructive mt-1">{errors.quantity}</p>}
         </div>
       </div>
 
       <div>
         <label className="block text-xs font-semibold text-foreground mb-1.5 uppercase tracking-wide">
-          Message
+          Message *
         </label>
         <textarea
           value={data.message || ""}

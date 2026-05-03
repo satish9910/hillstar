@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   ShieldCheck,
@@ -16,11 +16,12 @@ import {
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { QuoteForm } from "@/components/QuoteForm";
+import { QuoteModalTrigger } from "@/components/QuoteModal";
 import { SITE, SUB_BRANDS } from "@/lib/site";
 import heroImg from "@/assets/hero-factory.jpg";
-import productMotor from "@/assets/product-motor.jpg";
-import productFan from "@/assets/product-fan.jpg";
-import productPower from "@/assets/product-power.jpg";
+import productMotor from "@/assets/product-motor-new.jpg";
+import productFan from "@/assets/product-fan-new.jpg";
+import productPower from "@/assets/product-power-new.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -87,7 +88,7 @@ const reasons = [
   {
     icon: Truck,
     title: "Fast Pan-India Delivery",
-    desc: "24-hour dispatch from our Pune facility. Bulk orders shipped nationwide.",
+    desc: "24-hour dispatch from our Delhi facility. Bulk orders shipped nationwide.",
   },
   {
     icon: Zap,
@@ -122,7 +123,7 @@ function HomePage() {
           <div className="absolute inset-0 bg-gradient-hero" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 lg:px-8 py-20 md:py-32 lg:py-40">
+        <div className="relative mx-auto max-w-7xl px-4 lg:px-8 py-22">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -149,13 +150,15 @@ function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-2 bg-gradient-accent text-accent-foreground px-7 py-4 rounded-md font-bold shadow-accent-glow hover:scale-105 transition-transform"
-              >
-                Get Instant Quote
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              <QuoteModalTrigger>
+                <button
+                  type="button"
+                  className="group inline-flex items-center gap-2 bg-gradient-accent text-accent-foreground px-7 py-4 rounded-md font-bold shadow-accent-glow hover:scale-105 transition-transform"
+                >
+                  Get Instant Quote
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </QuoteModalTrigger>
               <a
                 href={`tel:${SITE.phoneRaw}`}
                 className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/30 text-white px-7 py-4 rounded-md font-bold hover:bg-white/20 transition-colors"
@@ -222,14 +225,14 @@ function HomePage() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="group rounded-2xl bg-gradient-card border border-border overflow-hidden shadow-card-soft hover:shadow-elegant transition-all hover:-translate-y-1"
               >
-                <div className="aspect-square bg-muted overflow-hidden">
+                <div className="aspect-[4/3] bg-muted overflow-hidden">
                   <img
                     src={p.img}
                     alt={p.name}
                     className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     width={800}
-                    height={800}
+                    height={600}
                   />
                 </div>
                 <div className="p-6">
@@ -240,12 +243,14 @@ function HomePage() {
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-5">{p.desc}</p>
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:text-accent transition-colors"
-                  >
-                    Request a quote <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  <QuoteModalTrigger>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1.5 text-sm font-bold text-primary hover:text-accent transition-colors"
+                    >
+                      Request a quote <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </QuoteModalTrigger>
                 </div>
               </motion.div>
             ))}

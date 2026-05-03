@@ -1,9 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import productMotor from "@/assets/product-motor.jpg";
-import productFan from "@/assets/product-fan.jpg";
-import productPower from "@/assets/product-power.jpg";
+import { QuoteModalTrigger } from "@/components/QuoteModal";
+import productMotor from "@/assets/product-motor-new.jpg";
+import productFan from "@/assets/product-fan-new.jpg";
+import productPower from "@/assets/product-power-new.jpg";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -73,8 +74,8 @@ function ProductsPage() {
                 i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
               }`}
             >
-              <div className="rounded-2xl overflow-hidden bg-gradient-card border border-border shadow-card-soft aspect-square md:aspect-[4/3] lg:aspect-square">
-                <img src={p.img} alt={p.name} className="w-full h-full object-cover" loading="lazy" width={800} height={800} />
+              <div className="rounded-2xl overflow-hidden bg-gradient-card border border-border shadow-card-soft aspect-[4/3] lg:aspect-square">
+                <img src={p.img} alt={p.name} className="w-full h-full object-cover" loading="lazy" width={800} height={600} />
               </div>
               <div>
                 <span className="text-xs font-bold tracking-[0.25em] text-accent uppercase">{p.series}</span>
@@ -106,12 +107,14 @@ function ProductsPage() {
                     ))}
                   </ul>
                 </div>
-                <Link
-                  to="/contact"
-                  className="mt-7 inline-flex items-center gap-2 bg-gradient-accent text-accent-foreground px-6 py-3 rounded-md font-bold shadow-accent-glow hover:scale-105 transition-transform"
-                >
-                  Request a Quote <ArrowRight className="h-4 w-4" />
-                </Link>
+                <QuoteModalTrigger>
+                  <button
+                    type="button"
+                    className="mt-7 inline-flex items-center gap-2 bg-gradient-accent text-accent-foreground px-6 py-3 rounded-md font-bold shadow-accent-glow hover:scale-105 transition-transform"
+                  >
+                    Request a Quote <ArrowRight className="h-4 w-4" />
+                  </button>
+                </QuoteModalTrigger>
               </div>
             </div>
           ))}

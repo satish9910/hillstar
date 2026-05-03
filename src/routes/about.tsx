@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   Phone,
@@ -15,8 +15,9 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { QuoteModalTrigger } from "@/components/QuoteModal";
 import { SITE, SUB_BRANDS } from "@/lib/site";
-import gallery1 from "@/assets/gallery-1.jpg";
+import gallery1 from "@/assets/gallery-production-1.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -50,7 +51,7 @@ function AboutPage() {
               25 years powering India's industries.
             </h1>
             <p className="mt-6 text-lg text-white/80 max-w-2xl leading-relaxed">
-              From a small workshop in Pune to one of India's most trusted capacitor brands —
+              From a small workshop in Delhi to one of India's most trusted capacitor brands —
               Hill Star has been the silent partner behind countless motors, fans and power systems
               since 1999.
             </p>
@@ -72,7 +73,7 @@ function AboutPage() {
             <p className="mt-5 text-muted-foreground leading-relaxed">
               Founded in 1999, Hill Star Capacitor began as a family-run workshop with a simple mission:
               build capacitors that don't fail. Today we operate a 30,000 sq.ft ISO-certified facility
-              in Pune with seven sub-brands and a dealer network spanning every Indian state.
+              in Delhi with seven sub-brands and a dealer network spanning every Indian state.
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed">
               Our clients range from small motor rewinding shops to Fortune 500 OEMs. The
@@ -177,12 +178,14 @@ function AboutPage() {
             ))}
           </div>
           <div className="mt-12 text-center">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-gradient-accent text-accent-foreground px-7 py-4 rounded-md font-bold shadow-accent-glow hover:scale-105 transition-transform"
-            >
-              Request a Quote <ArrowRight className="h-4 w-4" />
-            </Link>
+            <QuoteModalTrigger>
+              <button
+                type="button"
+                className="inline-flex items-center gap-2 bg-gradient-accent text-accent-foreground px-7 py-4 rounded-md font-bold shadow-accent-glow hover:scale-105 transition-transform"
+              >
+                Request a Quote <ArrowRight className="h-4 w-4" />
+              </button>
+            </QuoteModalTrigger>
           </div>
         </div>
       </section>

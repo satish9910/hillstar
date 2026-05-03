@@ -1,28 +1,18 @@
-import { Zap } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import logoImage from "@/assets/logo.webp";
 
 export function Logo({ light = false }: { light?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-2.5 group">
-      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-gradient-accent shadow-accent-glow group-hover:scale-105 transition-transform">
-        <Zap className="h-5 w-5 text-accent-foreground" strokeWidth={2.5} fill="currentColor" />
-      </div>
-      <div className="flex flex-col leading-none">
-        <span
-          className={`font-display font-bold text-lg tracking-tight ${
-            light ? "text-white" : "text-primary"
+    <Link to="/" className="group inline-flex items-center" aria-label="Hill Star Capacitor home">
+      <img
+        src={logoImage}
+        alt="Hill Star Capacitor"
+        className={`w-auto object-contain transition-transform group-hover:scale-110 ${light
+          ? "h-24 brightness-0 invert drop-shadow-[0_1px_2px_rgba(255,255,255,0.25)]"
+          : "h-20 scale-125 origin-left ml-2"
           }`}
-        >
-          HILL STAR
-        </span>
-        <span
-          className={`text-[10px] font-semibold tracking-[0.25em] ${
-            light ? "text-white/70" : "text-muted-foreground"
-          }`}
-        >
-          CAPACITOR
-        </span>
-      </div>
+        loading="eager"
+      />
     </Link>
   );
 }

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Globe, Send, Share2 } from "lucide-react";
 import { Logo } from "./Logo";
+import { QuoteModalTrigger } from "./QuoteModal";
 import { SITE } from "@/lib/site";
 
 export function Footer() {
@@ -8,9 +9,7 @@ export function Footer() {
     <footer className="bg-primary text-primary-foreground mt-20">
       <div className="mx-auto max-w-7xl px-4 py-14 lg:px-8 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="[&_*]:!text-white">
-            <Logo light />
-          </div>
+          <Logo light />
           <p className="mt-4 text-sm text-white/70 leading-relaxed">
             ISO 9001:2015 certified manufacturer of motor, fan and power capacitors —
             trusted by 500+ businesses across India.
@@ -43,6 +42,11 @@ export function Footer() {
               <MapPin className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
               <span>{SITE.address}</span>
             </li>
+            <li className="pt-2 border-t border-white/5 mt-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Registration Details</p>
+              <p className="text-[11px] font-semibold text-white/60">GSTIN: {SITE.gstin}</p>
+              <p className="text-[11px] font-semibold text-white/60">MSME: {SITE.msme}</p>
+            </li>
           </ul>
         </div>
 
@@ -60,12 +64,14 @@ export function Footer() {
               </a>
             ))}
           </div>
-          <Link
-            to="/contact"
-            className="mt-6 inline-block bg-gradient-accent text-accent-foreground px-5 py-3 rounded-md font-bold text-sm shadow-accent-glow"
-          >
-            Request a Quote
-          </Link>
+          <QuoteModalTrigger>
+            <button
+              type="button"
+              className="mt-6 inline-block bg-gradient-accent text-accent-foreground px-5 py-3 rounded-md font-bold text-sm shadow-accent-glow"
+            >
+              Request a Quote
+            </button>
+          </QuoteModalTrigger>
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/60">

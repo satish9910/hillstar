@@ -11,7 +11,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Contact Hill Star Capacitor for instant quotes on motor, fan and power capacitors. Call +91 98765 43210 or fill our quick quote form. Reply within 24 hours.",
+          `Contact Hill Star Capacitor for instant quotes on motor, fan and power capacitors. Call ${SITE.phone} or fill our quick quote form. Reply within 24 hours.`,
       },
       { property: "og:title", content: "Contact Hill Star Capacitor" },
       { property: "og:description", content: "Get an instant capacitor quote. Pan-India supply, 24-hour dispatch." },
@@ -66,7 +66,7 @@ function ContactPage() {
               icon={MapPin}
               label="Factory & Office"
               value={SITE.address}
-              cta="Pune, India"
+              cta="New Delhi, India"
             />
             <div className="rounded-2xl bg-gradient-card border border-border p-6">
               <div className="flex items-center gap-2 text-primary font-bold mb-3">

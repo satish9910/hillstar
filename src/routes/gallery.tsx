@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { X, PlayCircle } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import g1 from "@/assets/gallery-1.jpg";
 import g2 from "@/assets/gallery-2.jpg";
@@ -9,9 +9,24 @@ import g3 from "@/assets/gallery-3.jpg";
 import g4 from "@/assets/gallery-4.jpg";
 import g5 from "@/assets/gallery-5.jpg";
 import g6 from "@/assets/gallery-6.jpg";
-import productMotor from "@/assets/product-motor.jpg";
-import productFan from "@/assets/product-fan.jpg";
-import productPower from "@/assets/product-power.jpg";
+import productMotor from "@/assets/product-motor-new.jpg";
+import productFan from "@/assets/product-fan-new.jpg";
+import productPower from "@/assets/product-power-new.jpg";
+import prod1 from "@/assets/gallery-production-1.jpg";
+import prod2 from "@/assets/gallery-production-2.jpg";
+import prod3 from "@/assets/gallery-production-3.jpg";
+import prod4 from "@/assets/gallery-production-4.jpg";
+import gp7 from "@/assets/gallery-product-7.jpg";
+import gp8 from "@/assets/gallery-product-8.jpg";
+import gp9 from "@/assets/gallery-product-9.jpg";
+import gp10 from "@/assets/gallery-product-10.jpg";
+import v1 from "@/assets/production-video-1.mp4";
+import v2 from "@/assets/production-video-2.mp4";
+import v3 from "@/assets/production-video-3.mp4";
+import v4 from "@/assets/production-video-4.mp4";
+import v5 from "@/assets/production-video-5.mp4";
+import v6 from "@/assets/production-video-6.mp4";
+import v7 from "@/assets/production-video-7.mp4";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -30,15 +45,27 @@ export const Route = createFileRoute("/gallery")({
 });
 
 const items = [
+  { src: v1, caption: "Inside the Production Line", type: "video" },
+  { src: v2, caption: "Automated Testing Station", type: "video" },
+  { src: v3, caption: "Quality Control Process", type: "video" },
+  { src: v4, caption: "Bulk Dispatch Preparation", type: "video" },
+  { src: v5, caption: "Manufacturing Flow", type: "video" },
+  { src: v6, caption: "Precision Winding", type: "video" },
+  { src: v7, caption: "Final Inspection", type: "video" },
+  { src: productMotor, caption: "Hill Star Motor Capacitors — 200/250 MFD Series" },
+  { src: productFan, caption: "Fan Capacitors — Multi-MFD Range for All Fan Types" },
+  { src: productPower, caption: "Heavy Duty Power Capacitors — Made in India" },
+  { src: prod1, caption: "Bulk Production — Ready for Dispatch" },
+  { src: prod2, caption: "Quality Inspected Batches" },
+  { src: prod3, caption: "Precision Engineering & Winding" },
+  { src: prod4, caption: "Testing Phase — 100% Reliability Check" },
+  { src: gp7, caption: "Hill Star Premium Product Range" },
+  { src: gp8, caption: "Industrial Grade Capacitor Solutions" },
+  { src: gp9, caption: "High Performance Capacitors" },
+  { src: gp10, caption: "Standard Product Packaging" },
   { src: g1, caption: "Assembly line — 100% in-line testing" },
   { src: g2, caption: "Quality control & precision testing lab" },
-  { src: productMotor, caption: "Motor capacitor production batch" },
   { src: g6, caption: "Automated film winding station" },
-  { src: g4, caption: "Electrolytic capacitor close-up" },
-  { src: productPower, caption: "Heavy-duty power capacitor" },
-  { src: g3, caption: "Pan-India dispatch warehouse" },
-  { src: g5, caption: "Field engineer — power-factor correction install" },
-  { src: productFan, caption: "Fan capacitor — ceiling fan series" },
 ];
 
 function GalleryPage() {
@@ -69,16 +96,36 @@ function GalleryPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: (i % 3) * 0.08 }}
-                className="group relative aspect-square overflow-hidden rounded-xl border border-border shadow-card-soft cursor-pointer"
+                className="group relative aspect-square overflow-hidden rounded-xl border border-border shadow-card-soft cursor-pointer bg-muted"
               >
-                <img
-                  src={it.src}
-                  alt={it.caption}
-                  className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  loading="lazy"
-                  width={1024}
-                  height={1024}
-                />
+                {it.type === "video" ? (
+                  <div className="h-full w-full relative">
+                    <video
+                      src={it.src}
+                      className="h-full w-full object-cover"
+                      muted
+                      playsInline
+                      onMouseOver={(e) => (e.target as HTMLVideoElement).play()}
+                      onMouseOut={(e) => {
+                        const v = e.target as HTMLVideoElement;
+                        v.pause();
+                        v.currentTime = 0;
+                      }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                      <PlayCircle className="h-12 w-12 text-white/80 group-hover:text-white transition-colors" />
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={it.src}
+                    alt={it.caption}
+                    className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                   <p className="text-white text-sm font-semibold leading-tight">{it.caption}</p>
                 </div>
@@ -110,11 +157,20 @@ function GalleryPage() {
               className="max-w-5xl w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
-                src={items[open].src}
-                alt={items[open].caption}
-                className="w-full h-auto rounded-lg shadow-elegant max-h-[80vh] object-contain"
-              />
+              {items[open].type === "video" ? (
+                <video
+                  src={items[open].src}
+                  controls
+                  autoPlay
+                  className="w-full h-auto rounded-lg shadow-elegant max-h-[80vh]"
+                />
+              ) : (
+                <img
+                  src={items[open].src}
+                  alt={items[open].caption}
+                  className="w-full h-auto rounded-lg shadow-elegant max-h-[80vh] object-contain"
+                />
+              )}
               <p className="text-center text-white mt-4 font-semibold">{items[open].caption}</p>
             </motion.div>
           </motion.div>

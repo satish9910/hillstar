@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X, Phone } from "lucide-react";
 import { Logo } from "./Logo";
+import { QuoteModalTrigger } from "./QuoteModal";
 import { SITE } from "@/lib/site";
 
 const NAV = [
@@ -30,13 +31,12 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-background/90 backdrop-blur-md shadow-card-soft border-b border-border"
-          : "bg-background"
-      }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
+        ? "bg-background/90 backdrop-blur-md shadow-card-soft border-b border-border"
+        : "bg-background"
+        }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 md:py-0 lg:px-8">
         <Logo />
 
         <nav className="hidden lg:flex items-center gap-1">
@@ -46,11 +46,10 @@ export function Header() {
               <Link
                 key={item.to}
                 to={item.to}
-                className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors ${
-                  active
-                    ? "text-accent bg-accent/10"
-                    : "text-foreground/80 hover:text-primary hover:bg-secondary"
-                }`}
+                className={`px-4 py-2 rounded-md text-sm font-semibold transition-colors ${active
+                  ? "text-accent bg-accent/10"
+                  : "text-foreground/80 hover:text-primary hover:bg-secondary"
+                  }`}
               >
                 {item.label}
               </Link>
@@ -66,12 +65,14 @@ export function Header() {
             <Phone className="h-4 w-4" />
             {SITE.phone}
           </a>
-          <Link
-            to="/contact"
-            className="bg-gradient-accent text-accent-foreground px-5 py-2.5 rounded-md text-sm font-bold shadow-accent-glow hover:scale-105 transition-transform"
-          >
-            Get Quote
-          </Link>
+          <QuoteModalTrigger>
+            <button
+              type="button"
+              className="bg-gradient-accent text-accent-foreground px-5 py-2.5 rounded-md text-sm font-bold shadow-accent-glow hover:scale-105 transition-transform"
+            >
+              Get Quote
+            </button>
+          </QuoteModalTrigger>
         </div>
 
         <button
@@ -92,11 +93,10 @@ export function Header() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`px-4 py-3 rounded-md text-base font-semibold ${
-                    active
-                      ? "text-accent bg-accent/10"
-                      : "text-foreground hover:bg-secondary"
-                  }`}
+                  className={`px-4 py-3 rounded-md text-base font-semibold ${active
+                    ? "text-accent bg-accent/10"
+                    : "text-foreground hover:bg-secondary"
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -109,12 +109,14 @@ export function Header() {
               <Phone className="h-4 w-4" />
               {SITE.phone}
             </a>
-            <Link
-              to="/contact"
-              className="mt-2 bg-gradient-accent text-accent-foreground px-5 py-3 rounded-md text-center font-bold"
-            >
-              Get Instant Quote
-            </Link>
+            <QuoteModalTrigger>
+              <button
+                type="button"
+                className="mt-2 bg-gradient-accent text-accent-foreground px-5 py-3 rounded-md text-center font-bold"
+              >
+                Get Instant Quote
+              </button>
+            </QuoteModalTrigger>
           </nav>
         </div>
       )}
