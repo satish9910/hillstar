@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin, Globe, Send, Share2 } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
 import { QuoteModalTrigger } from "./QuoteModal";
 import { SITE } from "@/lib/site";
@@ -52,18 +52,6 @@ export function Footer() {
 
         <div>
           <h4 className="font-display font-bold mb-4 text-white">Follow Us</h4>
-          <div className="flex gap-3">
-            {[Globe, Send, Share2].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="h-10 w-10 flex items-center justify-center rounded-md bg-white/10 hover:bg-accent transition-colors"
-                aria-label="Social link"
-              >
-                <Icon className="h-5 w-5" />
-              </a>
-            ))}
-          </div>
           <QuoteModalTrigger>
             <button
               type="button"
