@@ -44,7 +44,15 @@ export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
 });
 
-const items = [
+// Dynamically import all images and videos to ensure nothing is missed
+// Using relative path for glob to ensure maximum compatibility with Vite
+const allImages = import.meta.glob("../assets/*.{jpg,jpeg,png,webp}", { eager: true, import: "default" }) as Record<
+  string,
+  string
+>;
+const allVideos = import.meta.glob("../assets/*.mp4", { eager: true, import: "default" }) as Record<string, string>;
+
+const manualItems = [
   { src: v1, caption: "Inside the Production Line", type: "video" },
   { src: v2, caption: "Automated Testing Station", type: "video" },
   { src: v3, caption: "Quality Control Process", type: "video" },
@@ -68,6 +76,37 @@ const items = [
   { src: g6, caption: "Automated film winding station" },
 ];
 
+const manualSrcs = new Set(manualItems.map((it) => it.src));
+const dynamicItems: any[] = [];
+
+// Filter and add videos
+Object.entries(allVideos).forEach(([path, src]) => {
+  if (!manualSrcs.has(src)) {
+    dynamicItems.push({
+      src,
+      caption: "Production Highlight",
+      type: "video",
+    });
+  }
+});
+
+// Filter and add images
+Object.entries(allImages).forEach(([path, src]) => {
+  const filename = path.split("/").pop() || "";
+  // Exclude only the logo and hero factory, keep everything else
+  const isExcluded = filename.includes("logo") || filename.includes("hero-factory");
+
+  if (!manualSrcs.has(src) && !isExcluded) {
+    dynamicItems.push({
+      src,
+      caption: filename.includes("WhatsApp") ? "Factory & Production" : "Manufacturing Facility",
+      type: "image",
+    });
+  }
+});
+
+const items = [...manualItems, ...dynamicItems];
+
 function GalleryPage() {
   const [open, setOpen] = useState<number | null>(null);
 
@@ -80,7 +119,7 @@ function GalleryPage() {
             Inside our facility.
           </h1>
           <p className="mt-4 text-white/80 max-w-xl">
-            A look at our manufacturing floor, testing labs, products and people.
+            A look at our manufacturing floor, testing labs, products and people — featuring {items.length} photos and videos.
           </p>
         </div>
       </section>

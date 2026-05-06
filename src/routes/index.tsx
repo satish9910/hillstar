@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   ShieldCheck,
@@ -286,6 +286,57 @@ function HomePage() {
                 <p className="text-sm text-muted-foreground leading-relaxed">{r.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY HIGHLIGHTS */}
+      <section className="py-20 md:py-28 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <span className="text-xs font-bold tracking-[0.25em] text-accent uppercase">
+                Facility Gallery
+              </span>
+              <h2 className="mt-3 font-display text-3xl md:text-5xl font-bold text-primary text-balance">
+                Inside our manufacturing floor.
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                Take a look at our ISO-certified production lines, testing labs, and high-precision machinery.
+              </p>
+            </div>
+            <Link
+              to="/gallery"
+              className="inline-flex items-center gap-2 text-primary font-bold hover:text-accent transition-colors group"
+            >
+              View Full Gallery
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Object.values(
+              import.meta.glob("../assets/*.{jpg,jpeg,png,webp}", { eager: true, import: "default" })
+            )
+              .filter((src: any) => !src.includes("logo") && !src.includes("hero-factory"))
+              .slice(0, 8)
+              .map((src: any, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className="aspect-square rounded-xl overflow-hidden border border-border shadow-card-soft"
+                >
+                  <img
+                    src={src}
+                    alt="Hill Star Facility"
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </motion.div>
+              ))}
           </div>
         </div>
       </section>
