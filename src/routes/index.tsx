@@ -22,6 +22,9 @@ import heroImg from "@/assets/hero-factory.jpg";
 import productMotor from "@/assets/product-motor-new.jpg";
 import productFan from "@/assets/product-fan-new.jpg";
 import productPower from "@/assets/product-power-new.jpg";
+import productLighting from "@/assets/gallery-product-7.jpg";
+import productPump from "@/assets/gallery-product-8.jpg";
+import productSubmersible from "@/assets/gallery-product-10.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -64,6 +67,24 @@ const products = [
     desc: "Heavy-duty capacitors for industrial power-factor correction.",
     img: productPower,
     range: "5 – 100 KVAR",
+  },
+  {
+    name: "Lighting Capacitors",
+    desc: "Reliable performance for LED drivers, HID lamps, and ballasts.",
+    img: productLighting,
+    range: "2µF – 33µF",
+  },
+  {
+    name: "Pump Capacitors",
+    desc: "Heavy-duty capacitors for irrigation pumps and borewell motors.",
+    img: productPump,
+    range: "25µF – 150µF",
+  },
+  {
+    name: "Submersible Capacitors",
+    desc: "Water-resistant, high-durability capacitors for deep-well pumps.",
+    img: productSubmersible,
+    range: "36µF – 200µF",
   },
 ];
 
@@ -215,7 +236,7 @@ function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((p, i) => (
               <motion.div
                 key={p.name}
@@ -314,19 +335,19 @@ function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {Object.values(
               import.meta.glob("../assets/*.{jpg,jpeg,png,webp}", { eager: true, import: "default" })
             )
-              .filter((src: any) => !src.includes("logo") && !src.includes("hero-factory"))
-              .slice(0, 8)
+              .filter((src: any) => !src.includes("logo") && !src.includes("hero-factory") && !src.includes("product-"))
+              .slice(0, 20)
               .map((src: any, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
                   className="aspect-square rounded-xl overflow-hidden border border-border shadow-card-soft"
                 >
                   <img

@@ -5,6 +5,9 @@ import { QuoteModalTrigger } from "@/components/QuoteModal";
 import productMotor from "@/assets/product-motor-new.jpg";
 import productFan from "@/assets/product-fan-new.jpg";
 import productPower from "@/assets/product-power-new.jpg";
+import productLighting from "@/assets/gallery-product-7.jpg";
+import productPump from "@/assets/gallery-product-8.jpg";
+import productSubmersible from "@/assets/gallery-product-10.jpg";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -47,6 +50,30 @@ const catalog = [
     voltage: "415V – 525V AC",
     apps: ["Power-factor correction", "Industrial panels", "APFC units", "Harmonic filters"],
   },
+  {
+    name: "Lighting Capacitors",
+    img: productLighting,
+    series: "L-Series Ballast",
+    range: "2µF – 33µF",
+    voltage: "250V – 450V AC",
+    apps: ["LED drivers", "HID lamps", "Electronic ballasts", "Street lights"],
+  },
+  {
+    name: "Agricultural Pump Capacitors",
+    img: productPump,
+    series: "A-Series Heavy Duty",
+    range: "25µF – 150µF",
+    voltage: "440V – 600V AC",
+    apps: ["Irrigation pumps", "Borewell motors", "Farm machinery", "Power pumps"],
+  },
+  {
+    name: "Submersible Capacitors",
+    img: productSubmersible,
+    series: "S-Series Sealed",
+    range: "36µF – 200µF",
+    voltage: "440V AC",
+    apps: ["Submersible pumps", "Deep-well motors", "Water lifting", "Industrial wells"],
+  },
 ];
 
 function ProductsPage() {
@@ -59,7 +86,7 @@ function ProductsPage() {
             A capacitor for every application.
           </h1>
           <p className="mt-5 text-white/80 max-w-2xl text-lg">
-            From 1µF fan capacitors to 100 KVAR power-factor units — we manufacture the full
+            From 1µF fan capacitors to 200µF submersible units — we manufacture the full
             spectrum, all under one roof.
           </p>
         </div>
