@@ -25,6 +25,7 @@ import productPower from "@/assets/product-power-new.jpg";
 import productLighting from "@/assets/gallery-product-7.jpg";
 import productPump from "@/assets/gallery-product-8.jpg";
 import productSubmersible from "@/assets/gallery-product-10.jpg";
+import hillspeedLogo from "@/assets/hillspeed.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -217,6 +218,63 @@ function HomePage() {
                 </span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HILLSPEED SUB-BRAND */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
+            <div className="max-w-xl">
+              <div className="flex items-center gap-4 mb-4">
+                <img src={hillspeedLogo} alt="Hillspeed Logo" className="h-16 w-auto object-contain" />
+                <span className="h-8 w-[1px] bg-border hidden md:block" />
+                <span className="text-xs font-bold tracking-[0.25em] text-accent uppercase">
+                  Premium Sub-Brand
+                </span>
+              </div>
+              <h2 className="font-display text-3xl md:text-5xl font-bold text-primary">
+                Introducing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Hillspeed</span>
+              </h2>
+              <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+                Our latest premium range of high-performance capacitors. Specifically engineered for extreme durability and maximum efficiency in demanding industrial environments.
+              </p>
+            </div>
+            <QuoteModalTrigger>
+              <button className="bg-primary text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-primary/90 transition-all flex items-center gap-2">
+                Enquire Now <ArrowRight className="h-5 w-5" />
+              </button>
+            </QuoteModalTrigger>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {Object.entries(
+              import.meta.glob("../assets/*.{jpg,jpeg,png,webp}", { eager: true, import: "default" })
+            )
+              .filter(([path]) => path.includes("2026-05-12"))
+              .map(([_, src]) => src as string)
+              .slice(0, 12)
+              .map((src, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className="group relative aspect-square rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all"
+                >
+                  <img
+                    src={src}
+                    alt={`Hillspeed Product ${i + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <p className="text-white text-xs font-bold uppercase tracking-widest">Premium Series</p>
+                  </div>
+                </motion.div>
+              ))}
           </div>
         </div>
       </section>

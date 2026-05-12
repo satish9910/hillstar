@@ -16,6 +16,7 @@ export const SITE = {
 };
 
 export const SUB_BRANDS = [
+  "Hillspeed",
   "HillStar Pro",
   "HS Dynamo",
   "VoltaCore",

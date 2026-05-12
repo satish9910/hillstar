@@ -97,9 +97,16 @@ Object.entries(allImages).forEach(([path, src]) => {
   const isExcluded = filename.includes("logo") || filename.includes("hero-factory");
 
   if (!manualSrcs.has(src) && !isExcluded) {
+    let caption = "Manufacturing Facility";
+    if (filename.includes("2026-05-12")) {
+      caption = "Hillspeed Premium Series";
+    } else if (filename.includes("WhatsApp")) {
+      caption = "Factory & Production";
+    }
+    
     dynamicItems.push({
       src,
-      caption: filename.includes("WhatsApp") ? "Factory & Production" : "Manufacturing Facility",
+      caption,
       type: "image",
     });
   }
