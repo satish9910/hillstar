@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Share2 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Share2 } from "lucide-react";
+import { WhatsappIcon } from "@/components/FloatingActions";
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -99,7 +100,7 @@ function ContactPage() {
               cta="Tap to call"
             />
             <ContactCard
-              icon={MessageCircle}
+              icon={WhatsappIcon}
               label="WhatsApp"
               value="Chat with our team"
               href={waUrl}
