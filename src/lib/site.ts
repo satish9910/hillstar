@@ -13,6 +13,9 @@ export const SITE = {
   clientsServed: 500,
   productsShipped: "1M+",
   countries: 15,
+  facebook: "https://www.facebook.com/hill.star.2025/",
+  linkedin: "https://www.linkedin.com/in/hillstar-capacitor-7885903a5/",
+  youtube: "", // future channel
 };
 
 export const SUB_BRANDS = [
