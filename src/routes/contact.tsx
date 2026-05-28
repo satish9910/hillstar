@@ -52,6 +52,24 @@ function YoutubeIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
 import { SiteLayout } from "@/components/SiteLayout";
 import { QuoteForm } from "@/components/QuoteForm";
 import { SITE } from "@/lib/site";
@@ -139,7 +157,7 @@ function ContactPage() {
               <p className="text-xs text-muted-foreground mb-4">
                 Follow our official pages for the latest product releases, capacitor updates, and news.
               </p>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-4 gap-2">
                 <a
                   href={SITE.facebook}
                   target="_blank"
@@ -158,13 +176,24 @@ function ContactPage() {
                   <LinkedinIcon className="h-5 w-5 mb-1.5 text-[#0A66C2]" />
                   <span className="text-[10px] font-bold">LinkedIn</span>
                 </a>
-                <div className="relative group/yt flex flex-col items-center justify-center p-3 rounded-xl border border-border bg-white/5 opacity-55 cursor-not-allowed">
-                  <YoutubeIcon className="h-5 w-5 mb-1.5 text-muted-foreground" />
-                  <span className="text-[10px] font-bold text-muted-foreground">YouTube</span>
-                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-2.5 py-1 text-[9px] font-bold text-white bg-black/90 border border-white/10 rounded opacity-0 group-hover/yt:opacity-100 transition-opacity pointer-events-none uppercase tracking-wider">
-                    Coming Soon
-                  </span>
-                </div>
+                <a
+                  href={SITE.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center justify-center p-3 rounded-xl border border-border bg-card text-foreground hover:bg-[#E1306C]/5 hover:border-[#E1306C] hover:text-[#E1306C] transition-all duration-300 cursor-pointer"
+                >
+                  <InstagramIcon className="h-5 w-5 mb-1.5 text-[#E1306C]" />
+                  <span className="text-[10px] font-bold">Instagram</span>
+                </a>
+                <a
+                  href={SITE.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-col items-center justify-center p-3 rounded-xl border border-border bg-card text-foreground hover:bg-[#FF0000]/5 hover:border-[#FF0000] hover:text-[#FF0000] transition-all duration-300 cursor-pointer"
+                >
+                  <YoutubeIcon className="h-5 w-5 mb-1.5 text-[#FF0000]" />
+                  <span className="text-[10px] font-bold">YouTube</span>
+                </a>
               </div>
             </div>
           </div>

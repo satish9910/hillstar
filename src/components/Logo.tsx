@@ -8,8 +8,8 @@ export function Logo({ light = false }: { light?: boolean }) {
         src={logoImage}
         alt="Hill Star Capacitor"
         className={`w-auto object-contain transition-transform group-hover:scale-110 ${light
-          ? "h-24 brightness-0 invert drop-shadow-[0_1px_2px_rgba(255,255,255,0.25)]"
-          : "h-20 scale-125 origin-left ml-2"
+          ? "h-20 brightness-0 invert drop-shadow-[0_1px_2px_rgba(255,255,255,0.25)]"
+          : "h-11 lg:h-13 scale-105 origin-left ml-2"
           }`}
         loading="eager"
       />

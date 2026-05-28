@@ -23,9 +23,14 @@ export function FloatingActions() {
       <a
         href={`tel:${SITE.phoneRaw}`}
         aria-label="Call us"
-        className="md:hidden h-13 w-13 flex items-center justify-center rounded-full bg-primary text-primary-foreground shadow-elegant hover:scale-110 transition-transform"
+        className="relative h-14 w-14 flex items-center justify-center rounded-full text-white shadow-elegant hover:scale-110 transition-transform hover:shadow-[0_0_20px_rgba(0,122,255,0.6)] cursor-pointer"
+        style={{ backgroundColor: "#007AFF" }}
       >
-        <Phone className="h-6 w-6" />
+        <span
+          className="absolute inset-0 rounded-full animate-ping opacity-40"
+          style={{ backgroundColor: "#007AFF" }}
+        />
+        <Phone className="relative h-6 w-6 text-white" />
       </a>
       <a
         href={waUrl}

@@ -15,7 +15,8 @@ export const SITE = {
   countries: 15,
   facebook: "https://www.facebook.com/hill.star.2025/",
   linkedin: "https://www.linkedin.com/in/hillstar-capacitor-7885903a5/",
-  youtube: "", // future channel
+  instagram: "https://www.instagram.com/hillstarcapacitor?igsh=MWMyaW12cXljYjQyZA%3D%3D",
+  youtube: "https://www.youtube.com/@HillstarCapacitor-z2f",
 };
 
 export const SUB_BRANDS = [

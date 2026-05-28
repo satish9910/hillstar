@@ -55,6 +55,24 @@ function YoutubeIcon({ className }: { className?: string }) {
   );
 }
 
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground mt-20">
@@ -124,19 +142,26 @@ export function Footer() {
             >
               <LinkedinIcon className="h-5 w-5" />
             </a>
-            <div className="relative group">
-              <button
-                type="button"
-                disabled
-                className="h-10 w-10 flex items-center justify-center rounded-full bg-white/5 border border-white/5 text-white/30 cursor-not-allowed transition-all duration-300"
-                aria-label="YouTube channel coming soon"
-              >
-                <YoutubeIcon className="h-5 w-5" />
-              </button>
-              <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-2.5 py-1 text-[9px] font-bold text-white bg-black/90 border border-white/10 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-wider">
-                Coming Soon
-              </span>
-            </div>
+            <a
+              href={SITE.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Follow us on Instagram"
+              className="h-10 w-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-[#E1306C] hover:border-[#E1306C] hover:shadow-[0_0_15px_rgba(225,48,108,0.4)] transition-all duration-300 cursor-pointer"
+              aria-label="Instagram"
+            >
+              <InstagramIcon className="h-5 w-5" />
+            </a>
+            <a
+              href={SITE.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Subscribe to our YouTube channel"
+              className="h-10 w-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-[#FF0000] hover:border-[#FF0000] hover:shadow-[0_0_15px_rgba(255,0,0,0.4)] transition-all duration-300 cursor-pointer"
+              aria-label="YouTube"
+            >
+              <YoutubeIcon className="h-5 w-5" />
+            </a>
           </div>
           <QuoteModalTrigger>
             <button
